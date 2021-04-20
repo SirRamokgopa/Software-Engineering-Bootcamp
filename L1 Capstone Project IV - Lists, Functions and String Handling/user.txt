@@ -1,0 +1,5 @@
+admin, adm1n
+joe, hade
+King Quack, yeet
+a, a
+f, f

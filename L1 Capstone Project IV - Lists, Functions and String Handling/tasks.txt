@@ -1,0 +1,6 @@
+admin, Register Users with taskManager.py, Use taskManager.py to add the usernames and passwords for all team members that will be using this program., 10 Oct 2019, 20 Oct 2019, No
+admin, Assign initial tasks, Use taskManager.py to assign each team member with appropriate tasks, 10 Oct 2019, 25 Oct 2019, No
+King Quack, Watch TV, TV can be DSTV Netflix YouTube or whatever, 12 Apr 2021, 13 Apr 2021, No
+King Quack, a, a, 14 Apr 2021, 22 Apr 2022, Yes
+a, that thing, That thing that needs to be done, 14 Apr 2021, 12 Apr 2023, No
+King Quack, Test this thing, Just check if everything in Task 25 is working as expected, 15 Apr 2021, 01 May 2021, Yes

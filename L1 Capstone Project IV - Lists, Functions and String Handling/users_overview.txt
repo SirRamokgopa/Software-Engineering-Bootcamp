@@ -1,0 +1,36 @@
+
+    admin
+    Total number of tasks assigned:         2
+    Percentage of the total tasks assigned: 40
+    Percentage of the tasks completed:      0
+    Percentage of the tasks incomplete:     100
+    Percentage of the tasks overdue:        100
+    
+    joe
+    Total number of tasks assigned:         0
+    Percentage of the total tasks assigned: 0
+    Percentage of the tasks completed:      No tasks assigned
+    Percentage of the tasks incomplete:     No tasks assigned
+    Percentage of the tasks overdue:        No tasks assigned
+    
+    King Quack
+    Total number of tasks assigned:         2
+    Percentage of the total tasks assigned: 40
+    Percentage of the tasks completed:      50
+    Percentage of the tasks incomplete:     50
+    Percentage of the tasks overdue:        50
+    
+    a
+    Total number of tasks assigned:         1
+    Percentage of the total tasks assigned: 20
+    Percentage of the tasks completed:      0
+    Percentage of the tasks incomplete:     100
+    Percentage of the tasks overdue:        0
+    
+    f
+    Total number of tasks assigned:         0
+    Percentage of the total tasks assigned: 0
+    Percentage of the tasks completed:      No tasks assigned
+    Percentage of the tasks incomplete:     No tasks assigned
+    Percentage of the tasks overdue:        No tasks assigned
+    
