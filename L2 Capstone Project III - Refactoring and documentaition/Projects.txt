@@ -1,0 +1,5 @@
+RichMan House, 55522, House, 16 Street, 6198, 2.3E7, Wed Nov 08 00:00:00 SAST 2023, false, PeteRad, Bob, RichMan, 0.0
+Big House!, 878787, Flats, 98 Road, 6546, 3460.0, Sun Dec 22 00:00:00 SAST 2019, false, PeteRad, Bob, RichMan, 0.0
+RichMan Flats, 228787, Flats, 98 Road, 6546, 544440.0, Thu Nov 05 00:00:00 SAST 2020, false, PeteRad, Bob, RichMan, 0.0
+AwaysRight Appartments, 212177, Appartments, 22 Main, 5848, 4.333333E7, Thu Jan 23 00:00:00 SAST 2020, false, Designer Bro, Bob, AwaysRight, 0.0
+Mountain Apartments, 33351, Apartments, 6 Street, 6519, 440000.0, Fri Sep 08 00:00:00 SAST 2023, false, ThisGuy, Bob, HotShot, 230000.0

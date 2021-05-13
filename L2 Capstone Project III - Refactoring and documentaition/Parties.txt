@@ -1,0 +1,10 @@
+Customer, RichMan, 888888, 29 Street, aaa@hoo.za
+Customer, HotShot, 444555, 9 Street, boo@hoo.za
+Customer, AwaysRight, 578456745, 1 Road, always@right.com
+Architect, PeteRad, 555555, 5 Road, this@mail.co
+Architect, ThisGuy, 123456789, 3 Road, mail@g.co
+Contractor, John, 5222255, 6 Road, mail@mail
+Contractor, Bob, 666555, 7 Road, that@address.co
+Contractor, BuilderBro, 99999999, 7 Street, build@bro.co
+Architect, Designer Bro, 5439872, dbro@mail.co, 23 Main
+Contractor, Bob, 666555, that@address.co, 7 Road
