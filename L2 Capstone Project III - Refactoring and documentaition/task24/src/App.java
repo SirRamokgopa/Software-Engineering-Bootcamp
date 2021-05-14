@@ -1,21 +1,26 @@
 import java.util.ArrayList;
 
+/**
+ * {@code App} is the class that handles the user interface for PoisedProjects
+ */
 public class App {
+	// Get the only instance of PoisedProjects
 	static PoisedProjects app = PoisedProjects.getApp();
 
     public static void main(String[] args) {
-
-
+		// Display the start of the app
 		String message = "";
 		message += "=================================================================================\n";
 		message += "                                                                Poised Projects\n";
 		message += "=================================================================================";
 		System.out.println(message);
+
+		// Go to main menu 
 		mainMenu();
 	}
 
 	/**
-	 * 
+	 * The main menu for PoisedProjects
 	 */
 	private static void mainMenu() {
 		String message = "\n";
@@ -45,14 +50,14 @@ public class App {
 				break;
 		
 			default:
-				System.out.println("\nThat was not a valid option, my guy. 💁🏻‍♀️");
+				System.out.println("\nThat was not a valid option, my guy.");
 				mainMenu();
 				break;
 		}
 	}
 
 	/**
-	 * 
+	 * A method that allows a user to create a project
 	 */
 	private static void createProjectView() {
 		String message = "\n";
@@ -77,7 +82,7 @@ public class App {
 	}
 
 	/**
-	 * 
+	 * A method that allows a user to search for a project
 	 */
 	private static void projectSearchView() {
 		String message = "\n";
@@ -103,7 +108,7 @@ public class App {
 	}
 
 	/**
-	 * 
+	 * A method that allows a user to view all overdue projects.
 	 */
 	private static void overdueProjectsView() {
 		String message = "\n";
@@ -130,7 +135,7 @@ public class App {
 	}
 
 	/**
-	 * 
+	 * A method that allows a user to view all projects.
 	 */
 	private static void projectsView() {
 		String message = "\n";
@@ -158,6 +163,7 @@ public class App {
 	}
 
 	/**
+	 * A method that allows a user to view a specific project project and edit it.
 	 * 
 	 * @param project
 	 */
@@ -211,7 +217,7 @@ public class App {
 				break;
 		
 			default:
-				System.out.println("\nThat was not a valid option, my guy. 💁🏻‍♀️\n");
+				System.out.println("\nThat was not a valid option, my guy.\n");
 				mainMenu();
 				break;
 		}

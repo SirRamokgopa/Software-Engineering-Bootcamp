@@ -13,6 +13,13 @@ public class Party {
 	/**
 	 * Constructes a {@code Party} instance. That holds the details for a Contractor, 
 	 * Architect, or Customer.
+	 * 
+	 * @param name the name of the pary.
+	 * @param telephone the phone number of the pary.
+	 * @param email the email address of the pary.
+	 * @param address the physical address of the pary.
+	 * @param partyType the type of the party. ("Architect", "Contractor", or 
+	 * 					"customer").
 	 */ 
 	protected Party(String name, String telephone, String email, String address, String partyType) {
 		this.name = name;
@@ -29,6 +36,8 @@ public class Party {
 	 * This method is used to set the partyType attribute of this instance of 
 	 * {@code Party } to either "Contractor", or "Architect". The partyType 
 	 * attribute is set to "Customer" by default.
+	 * 
+	 * @return Returns  {@code Party.partyType} for this instance.
 	 */
 	public String getPartyType() {
 		return this.partyType;
@@ -36,6 +45,7 @@ public class Party {
 
 	/**
 	 * A method that gets the name of this instance of {@code Party}.
+	 * 
 	 * @return Returns the name of this instance of {@code Party}.
 	 */
 	public String getName() {
@@ -44,6 +54,7 @@ public class Party {
 
 	/**
 	 * A method that gets the phone number of this instance of {@code Party}.
+	 * 
 	 * @return Returns the phone number of this instance of {@code Party}.
 	 */
 	public String getPhone() {
@@ -52,6 +63,7 @@ public class Party {
 
 	/**
 	 * A method that gets the email address of this instance of {@code Party}.
+	 * 
 	 * @return Returns the email address of this instance of {@code Party}.
 	 */
 	public String getEmail() {
@@ -60,6 +72,7 @@ public class Party {
 
 	/**
 	 * A method that gets the the physical address of this instance of {@code Party}.
+	 * 
 	 * @return Returns the address of this instance of {@code Party}.
 	 */
 	public String getAddress() {
@@ -68,6 +81,8 @@ public class Party {
 
 	/**
 	 * A method that sets the phone number of this instance of {@code Party}.
+	 * 
+	 * @param phone the updated phone number.
 	 */
 	public void setPhone(String phone) {
 		this.telephone = phone;
@@ -75,6 +90,8 @@ public class Party {
 	
 	/**
 	 * A method that sets the email address of this instance of {@code Party}.
+	 * 
+	 * @param email the updated email address.
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -82,6 +99,8 @@ public class Party {
 
 	/**
 	 * A method that sets the physical address of this instance of {@code Party}.
+	 * 
+	 * @param address updated address.
 	 */
 	public void setAddress(String address) {
 		this.address = address;
@@ -90,6 +109,7 @@ public class Party {
 	/**
 	 * A method that returns the details of this instance of {@code Party} in a 
 	 * {@code String} format.
+	 * 
 	 * @return Returns a String representation of this {@code Party} instance.  
 	 */
 	public String toString() {
@@ -116,8 +136,10 @@ public class Party {
 	}
 
 
-
-	// Methods to disallow duplicates in sets ///////////////////////////////////////
+	/* Methods to disallow duplicates in sets ///////////////////////////////////////
+	These methodes are used to esure that there are no duplicates in the sets of
+	the PoisedProjects class by adding a hashcode and an is equal method.
+	*/
 
 	@Override 
 	public int hashCode() {

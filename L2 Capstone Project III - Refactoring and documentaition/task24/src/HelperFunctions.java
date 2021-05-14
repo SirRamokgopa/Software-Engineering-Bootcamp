@@ -8,14 +8,16 @@ import java.util.Scanner;
 
 
 /**
- * {@code HelperFunctions} is class contains the helper functions for the PoisedProjects class, 
- * the Project class, and the Party class.
+ * {@code HelperFunctions} is class contains the helper functions for handling user
+ * input for PoisedProjects.
  */
 public class HelperFunctions {
 
 	/**
-	 * Gets a date input from the user and checks that it is a date, then returns a date object
-	 * @return A Date object from the user's input
+	 * Gets a date input from the user and checks that it is a date, then returns a 
+	 * date object.
+	 * 
+	 * @return Returns a Date object from the user's input
 	 */
     protected static Date dateInput() {
 		Scanner userInput = new Scanner(System.in);
@@ -24,6 +26,7 @@ public class HelperFunctions {
 		DateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 		Date date;
 		
+		// Get user input
 		try {
 			System.out.println("Enter project deadline (dd/mm/yyyy)");
 			date = dateParser.parse(userInput.nextLine());
@@ -41,7 +44,7 @@ public class HelperFunctions {
 	 * Then checks that the input is a number and then returns the input as
 	 * an integer.
 	 * @param message A message to prompt the user for input.
-	 * @return An integer of the user input
+	 * @return Returns an {@code int} parsed from the user input
 	 */
     protected static int intInput(String message) {
 		Scanner userInput = new Scanner(System.in);
@@ -61,9 +64,11 @@ public class HelperFunctions {
     }
 
 	/**
+	 * A method that takes a string message and uses it to prompt a user 
+	 * for an input. Then parses a {@code double} from the input and returns it.
 	 * 
-	 * @param message
-	 * @return
+	 * @param message A message to prompt the user for input.
+	 * @return Returns a {@code double} parsed from user input.
 	 */
 	protected static double dblInput(String message) {
 		Scanner userInput = new Scanner(System.in);
@@ -76,7 +81,7 @@ public class HelperFunctions {
 		} 
         catch (Exception err ){
 			System.out.println();
-			return intInput("That's not a valid input, bro. 😅\n" + message);
+			return intInput("Eish. That's not a valid input, bro.\n" + message);
 		}  
 
         return number;
@@ -86,6 +91,7 @@ public class HelperFunctions {
 	 * Accepts a string containing a message to prompt the user for input.
 	 * Then checks that the input is not empty and then returns the input as
 	 * a string.
+	 * 
 	 * @param message  A message to prompt the user for input.
 	 * @return A string of the user input
 	 */
@@ -111,7 +117,10 @@ public class HelperFunctions {
     }
 
 	/**
-	 * This gets the yes no inpuut from user
+	 * This gets the yes no inpuut from user.
+	 * 
+	 * @param message A string message to prompt the user for input.
+	 * @return Returns a {@code boolean} true for yes and false for no.
 	 */
 	protected static boolean yesNoInput(String message) {
 		Scanner userInput = new Scanner(System.in);
@@ -130,14 +139,14 @@ public class HelperFunctions {
 				return false;
 			}
 			else {
-                System.out.println("\nYour input was wack, yo. 😆");
+                System.out.println("\nYour input was wack, yo.");
 			    return yesNoInput(message);
             }
 
 
 		} 
         catch (NumberFormatException err ){
-			return yesNoInput("That's not the kind of input we need, dude. 😅\n" + message);
+			return yesNoInput("That's not the kind of input we need, dude.\n" + message);
 		} 
     }
 

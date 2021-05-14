@@ -12,14 +12,16 @@ import java.util.List;
  */
 public class PoisedProjects {
 
-	// Refers to the only instance of projectsList
+	// Refers to the only instance of ProjectsList
 	protected static ProjectsList projectsList = ProjectsList.getprojectsList();
 
-	
+	// Attribute to hold singleton instance of 'this' class
 	private static PoisedProjects app = null;
 
+	// Constructor
 	private PoisedProjects() {}
 
+	// A method to create return only instance of 'this' class 
 	public static PoisedProjects getApp() {
 		if (app == null) {
 			app = new PoisedProjects();
@@ -29,9 +31,13 @@ public class PoisedProjects {
 		return app;
 	} 
 
-	/** 
-	 * Takes a string input, either customer, contractor, or architect and 
+	/**
+	 *  A method that creates and returns a new {@code Party} Object. 
      * returns a Party object.
+	 * 
+	 * @param partyType the type of party to be created (Either "Customer", "Contractor", 
+	 * or "Architect").
+	 * @return Returns a new {@code Party} object.
 	 */
 	public Party createParty(String partyType) {
 		
@@ -50,22 +56,32 @@ public class PoisedProjects {
 		return party;
 	}
 	
+	/**
+	 * This method creates the parameters for the overloaded {@code createProject()} 
+	 * method then calls that method.
+	 */
 	public void createProject() {		
+		// List of required parties
 		List<String> parties = Arrays.asList(new String[] {"Customer", "Architect", "Contractor"});
 		ArrayList<Party> partiesObjects = new ArrayList<Party>();
 
+		// Get party objects
 		parties.forEach((party) -> {
 			// Prompt user to search for party or create one
 			partiesObjects.add(createOrEditParty(party));
 		});
 		
+		// Create project
 		createProject(null, partiesObjects.get(1), partiesObjects.get(2), partiesObjects.get(0));
 	}
 
 	/**
+	 * A method that allows a user to create new {@code Party} Objects for a project
+	 * or search for exsisting {@code Party} Objecst.
 	 * 
-	 * @param party
-	 * @return
+	 * @param party the type of {@code Party}. (Either Contractor, Architect, or 
+	 * 				Customer.)
+	 * @return Returns a {@code Party} Object.
 	 */
 	private Party createOrEditParty(String party) {
 		
@@ -77,8 +93,8 @@ public class PoisedProjects {
 		} while (userChoice.equalsIgnoreCase("2") || userChoice.equalsIgnoreCase("1") || userChoice.equalsIgnoreCase("search"));
 
 		if (userChoice.equalsIgnoreCase("1") || userChoice.equalsIgnoreCase("search")) {
-
-			String name = HelperFunctions.stringInput("Name of " + party + " 🔎: ");
+			// Search for party
+			String name = HelperFunctions.stringInput("Name of " + party + " to search: ");
 			Party partyResult = projectsList.searchpParty(name, party);
 
 			if (partyResult!=null) {
@@ -89,12 +105,13 @@ public class PoisedProjects {
 				System.out.println("\n" + party + " not found.");
 				boolean tryagain  = HelperFunctions.yesNoInput("Try again? ");
 
+				// Prompt user to search again or not
 				if (tryagain) {
-					name = HelperFunctions.stringInput("\nName of " + party + " 🔎: ");
+					name = HelperFunctions.stringInput("\nName of " + party + " to search: ");
 					partyResult = projectsList.searchpParty(name, party);
 				}
 				else {
-					System.out.println("\nLet's try to create the " + party + " instead. 😅");
+					System.out.println("\nLet's try to create the " + party + " instead.");
 					partyResult = createParty(party);
 					return partyResult;
 				}
@@ -103,10 +120,14 @@ public class PoisedProjects {
 		return  createParty(party); 
 	}
 
-	/** 
-	 * This method creates and returns project object. 
-	 * The inputs are optional and may be replaced with a null
-	 * Not too sure of why it needs to throw HeadlessException, ParseException
+	/**
+	 * A method that creates and returns a {@code Project} object. 
+	 * 
+	 * @param projectName the name of the project.
+	 * @param architect the Architect {@code Party} of the project.
+	 * @param contractor the Contractor {@code Party} of the project.
+	 * @param customer the Customer {@code Party} of the project.
+	 * @return Returns a new {@code Project} Object.
 	 */
 	private Project createProject(String projectName, Party architect, Party contractor, Party customer) {
 		
@@ -133,10 +154,15 @@ public class PoisedProjects {
 	}
 
 	/**
-	 * Displays a list of ongoing projects
+	 *  A method that displays a list of projects in the console.
+	 * 
+	 * @return Returns an {@code ArrayList<Project>} of  projects.
 	 */
 	public ArrayList<Project> viewCurrentProjects() {
+		// Get array of overdue projects
 		ArrayList<Project> projects = projectsList.getProjects();
+
+		// Print each project
 		int numToChoose = 1;
 		for (Project project: projects) {
             System.out.println("\n" + project.toString());
@@ -147,10 +173,15 @@ public class PoisedProjects {
 	}
 
 	/**
-	 * Displays a list of overdue projects
+	 *  A method that displays a list of overdue projects in the console.
+	 * 
+	 * @return Returns an {@code ArrayList<Project>} of overdue projects.
 	 */
 	public ArrayList<Project> viewOverdueProjects() {
+		// Get array of overdue projects
 		ArrayList<Project> projects = projectsList.getOverdueProjects();
+		
+		// Print each project
 		int numToChoose = 1;
 		for (Project project: projects) {
             System.out.println("\n" + project.toString());
@@ -162,13 +193,23 @@ public class PoisedProjects {
 
 
 	/**
-	 *  Find and select a project by entering either the project number or project name
-	*/
+	 * A method that that searches for a {@code Project} by name and by project 
+	 * number.
+	 * 
+	 * @param input the name or project number to be searched.
+	 * @return Returns a matching {@code Project} Object or null if no matches are
+	 * 		   found.
+	 */
 	public Project searchProject(String input) {
+		// Search by name
 		Project result =  projectsList.searchProjectByName(input);
+		
+		// Search by project number if name is not found
 		if (result == null) {
 			result = projectsList.searchProjectByNumber(input);
 		}
+
+		// Set result to null if no matches are found
 		if (result == null) {
 			result = null;
 			System.out.println("\nResult not found");
@@ -176,8 +217,17 @@ public class PoisedProjects {
 		return result;
 	}
 
+	/**
+	 * A method that allows a user to update the {@code Project.amountPaid} attribute 
+	 * of a {@code Project}.
+	 * 
+	 * @param project the {@code Project} to be updated.
+	 */
 	public void addProjectPayment(Project project) {
+		// Get user input
 		double amount = HelperFunctions.dblInput(":: Amount to be added");
+		
+		// Update project payment
 		project.addPayment(amount);
 
 		// Write updates to file
@@ -186,8 +236,17 @@ public class PoisedProjects {
 		System.out.println("All done :)\n");
 	}
 
+	/**
+	 * A method that allows a user to update the {@code Project.name} attribute 
+	 * of a {@code Project}.
+	 * 
+	 * @param project the {@code Project} to be updated.
+	 */
 	public void editProjectName(Project project) {
+		// Get user input.
 		String name = HelperFunctions.stringInput(":: Enter new project name");
+		
+		// Set new name
 		project.setName(name);
 
 		// Write updates to file
@@ -196,8 +255,17 @@ public class PoisedProjects {
 		System.out.println("All done :)\n");
 	}
 
+	/**
+	 * A method that allows a user to update the {@code Project.deadline} attribute 
+	 * of a {@code Project}.
+	 * 
+	 * @param project the {@code Project} to be updated.
+	 */
 	public void editProjectDeadline(Project project) {
+		// Get user input
 		Date deadlineUpdDate = HelperFunctions.dateInput();
+
+		// Set new date
 		project.setDeadline(deadlineUpdDate);
 
 		// Write updates to file
@@ -206,6 +274,12 @@ public class PoisedProjects {
 		System.out.println("All done :)\n");
 	}
 
+	/**
+	 * A method that allows a user to edit a {@code Party} of a {@code Project}.
+	 * 
+	 * @param project the {@code Project} Object to be updated.
+	 * @param partyType the type of {@code Party} Object to be updated.
+	 */
 	public void editParty(Project project, String partyType) {
 		switch (partyType) {
 			case "Architect":
@@ -238,12 +312,20 @@ public class PoisedProjects {
 	}
 	
 	/**
+	 * A method that sets {@code Project.completed} to true and then the prints the 
+	 * invoice to console if payment for the project is still due. This method then
+	 * adds the project to the completedProjects set and writes the project to 
+	 * file. 
 	 * 
+	 * @param project the project to be finalized.
 	 */
 	public void finaliseProject(Project project) {
+		// Set project to complete and get invoice if payment is still due
 		String[] invoice = project.finalizePoject();
 
+		// Format invoice
 		if (invoice != null) {
+			// Create invoice to print
 			String message = "\n";
 			message += "==================== Invoice\n";
 			message += "Customer:  " + invoice[0] + "\n";
@@ -259,7 +341,7 @@ public class PoisedProjects {
 		projectsList.addCompletedProject(project);
 		FileWriterr.writeCompleted(project.getTextOutput() + ", " + new Date());
 
-		System.out.println("Nice! Another project in the bag. 😎\n");
+		System.out.println("Nice! Another project in the bag.\n");
 	}
 
 }

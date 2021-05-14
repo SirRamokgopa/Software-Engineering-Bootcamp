@@ -23,7 +23,7 @@ public class Project {
 	private Party contractor;
 	private Party customer;
 
-	// To format the project fee
+	// To format the project fee in strings
 	DecimalFormat priceFormat = new DecimalFormat("#.##");
 	// To format date in strings
 	DateFormat dateFormat = new SimpleDateFormat("EEE dd MMM YYYY");
@@ -67,7 +67,9 @@ public class Project {
 	}
 
 	/**
+	 * A method that sets the name for this instance of {@code Project}.
 	 * 
+	 * @param name the name to update this instance if {@code Project} with.
 	 */
 	protected void setName(String name) {
 		this.name = name;
@@ -92,7 +94,8 @@ public class Project {
 	}
 
 	/**
-	 * A method that returns the amount paid for this instance of {@code Project}
+	 * A method that returns the amount paid for this instance of {@code Project}.
+	 * 
 	 * @return returns the amount paid for this instance.
 	 */
 	public double getPaidAmount() {
@@ -102,13 +105,17 @@ public class Project {
 	/**
 	 * A method that sets the total amount paid for this instance of {@code Project}.
 	 * Not to be confused with {@code addPayment}.
+	 * 
+	 * @param amount the amount to set {@code this.paidAmount}.
 	 */
 	protected void setPaidAmount(Double amount) {
 		this.paidAmount = amount;
 	}
 
 	/**
-	 * A method that adds to the amount paid for this instance of {@code Project}
+	 * A method that adds to the amount paid for this instance of {@code Project}.
+	 * 
+	 * @param amount the amount to be added to {@code this.paidAmount}.
 	 */
 	protected void addPayment(Double amount) {
 		this.paidAmount += amount;
@@ -125,18 +132,23 @@ public class Project {
 	}
 
 	/**
-	 * A method that sets the due date for this instance of {@code Project}. This method
-	 * calls {@code HelperFunctions.dateInput()} to get the date from a user's input. 
+	 * A method that sets the due date for this instance of {@code Project}. This 
+	 * method calls {@code HelperFunctions.dateInput()} to get the date from a user's 
+	 * input. 
+	 * 
+	 * @param date the date to set the project deadline to.
 	 */
 	protected void setDeadline(Date date) {
 		this.deadline = date;
 	}
 
 	/**
-	 * A method that finalises this instance of {@code Project}. It will generate an invoice 
-	 * if the project {@code this.paidAmount} is less than the project {@code this.fee}. It 
-	 * will aslo add the date of completion and set {@code this.completed} to true for this 
-	 * inscance of {@code Project}.
+	 * A method that finalises this instance of {@code Project}. It will generate an
+	 * invoice if the project {@code this.paidAmount} is less than the project 
+	 * {@code this.fee}. It will aslo add the date of completion and set 
+	 * {@code this.completed} to true for this inscance of {@code Project}.
+	 * 
+	 * @return Reaturns a {@code String[]} with the invoice details.
 	 */
 	protected String[] finalizePoject() {
 		this.completed = true;
@@ -221,6 +233,7 @@ public class Project {
 	/**
 	 * A method that returns the details of this instance of {@code Project} in a 
 	 * {@code String} format.
+	 * 
 	 * @return Returns a String representation of this {@code Project} instance.  
 	 */
 	public String toString() {
@@ -241,7 +254,7 @@ public class Project {
 
 	/** 
 	 * This method returns the attributes of this instance of {@code Project} so 
-	 * that it can be saved to a file.  
+	 * that they can be saved to a file.  
 	 * 
 	 * @return Returns a string of all the attributes sepparated by a comma and space. 
 	 */
@@ -262,8 +275,11 @@ public class Project {
 	}
 
 	
-	// Methods to disallow duplicates in sets ///////////////////////////////////////
-
+	/* Methods to disallow duplicates in sets ///////////////////////////////////////
+	These methodes are used to esure that there are no duplicates in the sets of
+	the PoisedProjects class by adding a hashcode and an is equal method.
+	*/
+	
 	@Override 
 	public int hashCode() {
         final int prime = 31;
@@ -300,8 +316,8 @@ public class Project {
 			return false;
 		if (!erf.equals(other.erf))
             return false;
-		if (deadline.compareTo(other.deadline) != 0)
-            return false;
+		// if (deadline.compareTo(other.deadline) != 0)
+        //     return false;
         return true;
     }
 }

@@ -1,29 +1,29 @@
 import java.io.FileWriter;
 
+/**
+ * {@code FileWriterr} is a class that hadles writing to file for PoisedProjects.
+ */
 public class FileWriterr {
     
 	/**
 	 * Writes a completed project to "Completed projects.txt". This method calls 
 	 * the {@code writeToFile()} method with append set to true.
+	 * 
+	 * @param output the data to be written to file
 	 */
 	protected static void writeCompleted(String output) {
 		writeToFile("Completed.txt", output, true);
 	}
 
 	/**
-	 * This method calls the {@code writeToFile()} method with append set to true
+	 * A method that calls the {@code writeToFile()} method with append set to true
+	 * 
+	 * @param filename the name of the file to be written to.
+	 * @param output the data to be written to file.
 	 */
 	protected static void writeToFile(String filename, String output) {
 		writeToFile(filename, output, true);
 	}
-
-	/**
-	 * This method calls the {@code writeToFile()} method with append set to false
-	 */
-	protected static void cleanWriteToFile(String filename, String output) {
-		writeToFile(filename, output, false);
-	}
-
 
 	/**
 	 * Writes the contents of the {@code outut} parameter to a file specified by the 
@@ -31,7 +31,8 @@ public class FileWriterr {
 	 * 
 	 * @param filename The name(including extention) of the file that will be written.  
 	 * @param output A fromatted string that will be written to file.
-	 * @param append Appends to file if set to true and overwites the file if set to false.
+	 * @param append Appends to file if set to true and overwites the file if set to 
+	 * 				 false.
 	 */
 	protected static void writeToFile(String filename, String output, boolean append) {
 
