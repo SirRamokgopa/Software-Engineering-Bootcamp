@@ -8,7 +8,9 @@ import java.util.HashSet;
  */
 public class ProjectsList {
 
+    // Attributes for ProjectList and DBHandler.
     private static ProjectsList projectsList = null;
+    private static DBHandler db = DBHandler.getDbHandler();
 	
 	private HashSet<Project> projects;
 	private HashSet<Project> completedProjects;
@@ -16,6 +18,9 @@ public class ProjectsList {
     private HashSet<Party> architects;
     private HashSet<Party> contractors;
 	
+    /**
+     * Provate constructor for signleton design pattern.
+     */
 	private ProjectsList() {
 		projects  = new HashSet<Project>();
 
@@ -91,10 +96,7 @@ public class ProjectsList {
         completedProjects.add(project);  
 
         // Remove project from projects set
-        projects.remove(project);
-        
-        // Update the projects file 
-        this.updateProjectsFile();
+        projects.remove(project);        
     }
 
     /**
@@ -161,7 +163,7 @@ public class ProjectsList {
      */
     protected Party searchpParty(String name, String partyType) {
         // Update parties sets
-        FileReader.readParties();
+        db.readParties();
 
         // Search for party
         switch (partyType) {
@@ -191,50 +193,4 @@ public class ProjectsList {
         }
     }
 
-    /**
-     * A method that writes the parties from the customers, contractors, and 
-     * architects sets to Parties.txt. 
-     */
-    protected void updatePartiesFile() {
-        // Buffer four output 
-        String[] output = new String[1];
-        output[0] = "";
-
-        // Add parties to buffer
-        customers.forEach((customer) -> {
-            output[0] += customer.getTextOutput() + "\n";
-        });
-        architects.forEach((architect) -> {
-            output[0] += architect.getTextOutput() + "\n";
-        });
-        contractors.forEach((contractor) -> {
-            output[0] += contractor.getTextOutput() + "\n";
-        });
-
-        // Write updated parties to file 
-        FileWriterr.writeToFile("Parties.txt", output[0].trim(), false);
-        
-        // Update the projects list
-        FileReader.readProjects();
-    }
-
-    /**
-     * A method that writes the projects in the Projects set to Projects.txt.
-     */
-    protected void updateProjectsFile() {
-        // Buffer four output 
-        String[] output = new String[1];
-        output[0] = "";
-
-        // Add projects to buffer
-        projects.forEach((project) -> {
-            output[0] += project.getTextOutput() + "\n";
-        });
-
-        // Write updated projects to file 
-        FileWriterr.writeToFile("Projects.txt", output[0].trim(), false);
-
-        // Update the projects list
-        FileReader.readProjects();
-    }
 }

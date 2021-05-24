@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * {@code Party} class represents Pary objects in poised projects
  * All Contractor, Architect, and Customers are instances of this class.
@@ -122,16 +125,17 @@ public class Party {
 
 	/** 
 	 * This method returns the attributes of this instance of {@code Project} so 
-	 * that it can be saved to a file.  
+	 * that it can be saved to a a database.  
 	 * 
-	 * @return Returns a string of all the attributes sepparated by a comma and space. 
+	 * @return Returns a {@code Map<String,String>} of all the attributes.
 	 */
-	protected String getTextOutput() {
-		String output = this.partyType + ", ";
-		output += this.name + ", ";
-		output += this.telephone + ", ";
-		output +=  this.email + ", ";
-		output +=  this.address;
+	protected Map<String,String> getDBOutput() {
+		Map<String,String> output = new HashMap<String,String>();
+		output.put("partyType", this.partyType);
+		output.put("name", this.name);
+		output.put("phone", this.telephone);
+		output.put("email", this.email);
+		output.put("address", this.address);
 		return output;
 	}
 

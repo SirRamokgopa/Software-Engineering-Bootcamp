@@ -1,2 +1,0 @@
-HotCrib, 55511, House, 8 Street, 6190, 3300000.0, Wed Nov 08 00:00:00 SAST 2023, true, John, Bob, HotShot, 0, Thu May 13 20:40:52 SAST 2021
-HotCrib, 55511, House, 8 Street, 6190, 3300000.0, Wed Nov 08 00:00:00 SAST 2023, true, John, Bob, HotShot, 2200000.0, Thu May 13 20:54:39 SAST 2021

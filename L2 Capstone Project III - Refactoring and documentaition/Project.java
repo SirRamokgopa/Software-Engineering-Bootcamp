@@ -3,6 +3,8 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * {@code Project} is a class that represents Project objects in Poised Projects.
@@ -27,8 +29,22 @@ public class Project {
 	DecimalFormat priceFormat = new DecimalFormat("#.##");
 	// To format date in strings
 	DateFormat dateFormat = new SimpleDateFormat("EEE dd MMM YYYY");
+	DateFormat dbDateFormat = new SimpleDateFormat("YYYY-MM-dd");
 	
-	// Constructor
+	/**
+	 * Project Constuctor
+	 * @param name The name of the project.
+	 * @param projectNumber The project number of the project.
+	 * @param type The type of the project.
+	 * @param address The address of the project.
+	 * @param erf The ERF number of the project.
+	 * @param fee The fee for the project.
+	 * @param deadline The project deadline.
+	 * @param architect The architect of the project.
+	 * @param contractor The contractor of the project.
+	 * @param customer The customer for the project.
+	 * @param paidAmount The amount that has been paid for the project so far.
+	 */
 	protected Project(String name, 
 				   String projectNumber, 
 				   String type, 
@@ -254,23 +270,23 @@ public class Project {
 
 	/** 
 	 * This method returns the attributes of this instance of {@code Project} so 
-	 * that they can be saved to a file.  
+	 * that they can be saved to a database.  
 	 * 
-	 * @return Returns a string of all the attributes sepparated by a comma and space. 
+	 * @return Returns a {@code Map<String,String>} of all the attributes.
 	 */
-	protected String getTextOutput() {
-		String output = this.name + ", ";
-		output += this.projectNumber + ", ";
-		output +=  this.type + ", ";
-		output +=  this.address + ", ";
-		output +=  this.erf + ", ";
-		output +=  this.fee + ", ";
-		output +=  this.deadline + ", ";
-		output +=  this.completed + ", ";
-		output +=  this.architect.getName() + ", ";
-		output +=  this.contractor.getName() + ", ";
-		output +=  this.customer.getName() + ", ";
-		output +=  this.paidAmount;
+	protected Map<String,String> getDBOutput() {
+		Map<String,String> output = new HashMap<String,String>();
+		output.put("name", this.name);
+		output.put("address", this.address);
+		output.put("proj_num", this.projectNumber);
+		output.put("type", this.type);
+		output.put("erf", this.erf);
+		output.put("fee", Double.toString(this.fee));
+		output.put("paid_amount", Double.toString(this.paidAmount));
+		output.put("deadline", dbDateFormat.format(this.deadline));
+		output.put("architect", this.architect.getName());
+		output.put("contractor", this.contractor.getName());
+		output.put("customer", this.customer.getName());
 		return output;
 	}
 

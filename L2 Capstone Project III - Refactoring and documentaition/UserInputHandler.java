@@ -11,7 +11,7 @@ import java.util.Scanner;
  * {@code HelperFunctions} is class contains the helper functions for handling user
  * input for PoisedProjects.
  */
-public class HelperFunctions {
+public class UserInputHandler {
 
 	/**
 	 * Gets a date input from the user and checks that it is a date, then returns a 
@@ -109,10 +109,11 @@ public class HelperFunctions {
 			    return stringInput(message);
             }
 		} 
-        catch (NumberFormatException err ){
-			return stringInput("Invalid input.\n" + message);
+        catch (Exception err ){
+                System.out.println("Invalid input.\n");
+				return stringInput(message);
 		} 
-
+		
         return str;
     }
 
@@ -142,8 +143,6 @@ public class HelperFunctions {
                 System.out.println("\nYour input was wack, yo.");
 			    return yesNoInput(message);
             }
-
-
 		} 
         catch (NumberFormatException err ){
 			return yesNoInput("That's not the kind of input we need, dude.\n" + message);

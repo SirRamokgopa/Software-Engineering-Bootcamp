@@ -10,9 +10,9 @@ public class App {
     public static void main(String[] args) {
 		// Display the start of the app
 		String message = "";
-		message += "=================================================================================\n";
-		message += "                                                                Poised Projects\n";
-		message += "=================================================================================";
+		message += "======================================================================\n";
+		message += "                                                     Poised Projects\n";
+		message += "======================================================================";
 		System.out.println(message);
 
 		// Go to main menu 
@@ -31,7 +31,7 @@ public class App {
 		message += ":: Enter choice below. (-1) to quit";
 
 		// Get user input
-		int userInput = HelperFunctions.intInput(message);
+		int userInput = UserInputHandler.intInput(message);
 
 		switch (userInput) {
 			case -1:
@@ -61,13 +61,13 @@ public class App {
 	 */
 	private static void createProjectView() {
 		String message = "\n";
-		message += "=================================================================================\n";
-		message += "                                                                 Create Project";
+		message += "======================================================================\n";
+		message += "                                                          Create Project";
 		System.out.println(message);
 
 		// Get user input
 		message = ":: Would you like to create a new Project? ";
-		boolean userAgree = HelperFunctions.yesNoInput(message);
+		boolean userAgree = UserInputHandler.yesNoInput(message);
 
 		if (userAgree) {
 			System.out.println("Let's do this, boiii!");
@@ -86,13 +86,13 @@ public class App {
 	 */
 	private static void projectSearchView() {
 		String message = "\n";
-		message += "=================================================================================\n";
-		message += "                                                                Search Projects\n";
+		message += "======================================================================\n";
+		message += "                                                         Search Projects\n";
 		System.out.println(message);
 
 		// Get user input
 		message = ":: Enter the name or project number of the project you would like to search for\nor enter -1 to go back";
-		String userInput = HelperFunctions.stringInput(message);
+		String userInput = UserInputHandler.stringInput(message);
 		
 		if (userInput.equalsIgnoreCase("-1")) mainMenu();
 
@@ -112,8 +112,8 @@ public class App {
 	 */
 	private static void overdueProjectsView() {
 		String message = "\n";
-		message += "=================================================================================\n";
-		message += "                                                               Overdue Projects";
+		message += "======================================================================\n";
+		message += "                                                        Overdue Projects";
 		System.out.println(message);
 
 		// View all overdue projects
@@ -123,7 +123,7 @@ public class App {
 		int userInput;
 		do{
 			message = ":: Select a project by number or enter (-1) to go back";
-			userInput = HelperFunctions.intInput(message);
+			userInput = UserInputHandler.intInput(message);
 		} while (userInput > projects.size() || userInput == 0 || userInput < -1);
 		
 		if (userInput == -1)  {
@@ -139,8 +139,8 @@ public class App {
 	 */
 	private static void projectsView() {
 		String message = "\n";
-		message += "=================================================================================\n";
-		message += "                                                               Ongoing Projects";
+		message += "======================================================================\n";
+		message += "                                                        Ongoing Projects";
 		System.out.println(message);
 
 		// View all projects
@@ -150,7 +150,7 @@ public class App {
 		int userInput;
 		do{
 			message = ":: Select a project by number or enter (-1) to go back";
-			userInput = HelperFunctions.intInput(message);
+			userInput = UserInputHandler.intInput(message);
 		} while (userInput > projects.size() || userInput == 0 || userInput < -1);
 		
 		if (userInput == -1)  {
@@ -169,7 +169,7 @@ public class App {
 	 */
 	private static void projectView(Project project) {
 		String message = "\n";
-		message += "=================================================================================\n";
+		message += "======================================================================\n";
 
 		System.out.println(message);
 		System.out.println(project);
@@ -185,7 +185,7 @@ public class App {
 		message += ":: Enter choice below";
 
 		// Get user input
-		int userInput = HelperFunctions.intInput(message);
+		int userInput = UserInputHandler.intInput(message);
 
 		switch (userInput) {
 			case -1:
@@ -218,7 +218,7 @@ public class App {
 		
 			default:
 				System.out.println("\nThat was not a valid option, my guy.\n");
-				mainMenu();
+				projectView(project);
 				break;
 		}
 	}

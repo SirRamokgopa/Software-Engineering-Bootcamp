@@ -1,8 +1,11 @@
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This is the main Poised Projects class. 
@@ -12,21 +15,30 @@ import java.util.List;
  */
 public class PoisedProjects {
 
+	// Formatter for dates
+	DateFormat dbDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+
 	// Refers to the only instance of ProjectsList
 	protected static ProjectsList projectsList = ProjectsList.getprojectsList();
+	protected static DBHandler db = DBHandler.getDbHandler();
 
 	// Attribute to hold singleton instance of 'this' class
 	private static PoisedProjects app = null;
 
-	// Constructor
+	/**
+	 * Private constructor.
+	 */
 	private PoisedProjects() {}
 
-	// A method to create return only instance of 'this' class 
+	/**
+	 * A method to create return only one instance of PoisedProjects class.
+	 * @return Returns only one instance of {@code PoisedProjects}.
+	 */ 
 	public static PoisedProjects getApp() {
 		if (app == null) {
 			app = new PoisedProjects();
 			// Gets the data for the app from files
-			FileReader.readProjects();
+			db.readProjects();
 		}
 		return app;
 	} 
@@ -42,16 +54,16 @@ public class PoisedProjects {
 	public Party createParty(String partyType) {
 		
 		// Get party details
-		String name = HelperFunctions.stringInput("Enter " + partyType + " name.");
-		String phone = HelperFunctions.stringInput("Enter " + partyType + " phone number.");
-		String email = HelperFunctions.stringInput("Enter " + partyType + " email address.");
-		String address = HelperFunctions.stringInput("Enter " + partyType + " address.");
+		String name = UserInputHandler.stringInput("Enter " + partyType + " name.");
+		String phone = UserInputHandler.stringInput("Enter " + partyType + " phone number.");
+		String email = UserInputHandler.stringInput("Enter " + partyType + " email address.");
+		String address = UserInputHandler.stringInput("Enter " + partyType + " address.");
 		
 		Party party =  new Party(name, phone, email, address, partyType);
 
-		// Write person to file
-		FileWriterr.writeToFile("Parties.txt", party.getTextOutput());
-
+		// Write person to database
+		db.writeParty(party.getDBOutput());
+		
 		// return party object
 		return party;
 	}
@@ -89,12 +101,15 @@ public class PoisedProjects {
 		String userChoice;
 		do {
 			String message = "\n:: Would you like to:\n(1) search for " + party + "\n(2) create" + party + "\n" ; 
-			userChoice = HelperFunctions.stringInput(message);
-		} while (userChoice.equalsIgnoreCase("2") || userChoice.equalsIgnoreCase("1") || userChoice.equalsIgnoreCase("search"));
+			userChoice = UserInputHandler.stringInput(message);
+			if (userChoice.equalsIgnoreCase("2") || userChoice.equalsIgnoreCase("1") || userChoice.equalsIgnoreCase("search")) {
+				break;
+			}
+		} while (true);
 
 		if (userChoice.equalsIgnoreCase("1") || userChoice.equalsIgnoreCase("search")) {
 			// Search for party
-			String name = HelperFunctions.stringInput("Name of " + party + " to search: ");
+			String name = UserInputHandler.stringInput("Name of " + party + " to search: ");
 			Party partyResult = projectsList.searchpParty(name, party);
 
 			if (partyResult!=null) {
@@ -103,11 +118,11 @@ public class PoisedProjects {
 			do {
 				// If party is not found
 				System.out.println("\n" + party + " not found.");
-				boolean tryagain  = HelperFunctions.yesNoInput("Try again? ");
+				boolean tryagain  = UserInputHandler.yesNoInput("Try again? ");
 
 				// Prompt user to search again or not
 				if (tryagain) {
-					name = HelperFunctions.stringInput("\nName of " + party + " to search: ");
+					name = UserInputHandler.stringInput("\nName of " + party + " to search: ");
 					partyResult = projectsList.searchpParty(name, party);
 				}
 				else {
@@ -132,13 +147,13 @@ public class PoisedProjects {
 	private Project createProject(String projectName, Party architect, Party contractor, Party customer) {
 		
 		// Get project details from user
-		String projectNumber = HelperFunctions.stringInput("Enter project number\n::");
-		String type = HelperFunctions.stringInput("Enter project type (Eg. House, appartment block, store, etc...)\n::");
-		String address = HelperFunctions.stringInput("Enter project address\n::");
-		String erf = HelperFunctions.stringInput("Enter ERFnumber\n::");
-		double fee = HelperFunctions.dblInput("Enter fee (R)\n::");
+		String projectNumber = UserInputHandler.stringInput("Enter project number\n::");
+		String type = UserInputHandler.stringInput("Enter project type (Eg. House, appartment block, store, etc...)\n::");
+		String address = UserInputHandler.stringInput("Enter project address\n::");
+		String erf = UserInputHandler.stringInput("Enter ERFnumber\n::");
+		double fee = UserInputHandler.dblInput("Enter fee (R)\n::");
 		// Get date for deadline
-		Date deadline = HelperFunctions.dateInput();
+		Date deadline = UserInputHandler.dateInput();
 
 		// Use customer name for project if project name not supplied
 		projectName = projectName!=null ? projectName : customer.getName() + " " + type;
@@ -147,8 +162,11 @@ public class PoisedProjects {
 			projectName, projectNumber, type, address, erf, fee, deadline, architect, contractor, customer, 0
 		);
 
+		// Add project to project list
+		projectsList.addProject(project);
+
 		// Write project to file
-		FileWriterr.writeToFile("Projects.txt", project.getTextOutput());
+		db.writeProject(project.getDBOutput());
 
 		return project;
 	}
@@ -225,13 +243,13 @@ public class PoisedProjects {
 	 */
 	public void addProjectPayment(Project project) {
 		// Get user input
-		double amount = HelperFunctions.dblInput(":: Amount to be added");
+		double amount = UserInputHandler.dblInput(":: Amount to be added");
 		
 		// Update project payment
 		project.addPayment(amount);
 
-		// Write updates to file
-		projectsList.updateProjectsFile();
+		// Write updates to db
+		db.updateProject(project.getDBOutput());
 
 		System.out.println("All done :)\n");
 	}
@@ -244,13 +262,13 @@ public class PoisedProjects {
 	 */
 	public void editProjectName(Project project) {
 		// Get user input.
-		String name = HelperFunctions.stringInput(":: Enter new project name");
+		String name = UserInputHandler.stringInput(":: Enter new project name");
 		
 		// Set new name
 		project.setName(name);
 
 		// Write updates to file
-		projectsList.updateProjectsFile();
+		db.updateProject(project.getDBOutput());
 
 		System.out.println("All done :)\n");
 	}
@@ -263,13 +281,13 @@ public class PoisedProjects {
 	 */
 	public void editProjectDeadline(Project project) {
 		// Get user input
-		Date deadlineUpdDate = HelperFunctions.dateInput();
+		Date deadlineUpdDate = UserInputHandler.dateInput();
 
 		// Set new date
 		project.setDeadline(deadlineUpdDate);
 
 		// Write updates to file
-		projectsList.updateProjectsFile();
+		db.updateProject(project.getDBOutput());
 
 		System.out.println("All done :)\n");
 	}
@@ -305,8 +323,8 @@ public class PoisedProjects {
 				break;
 		}
 		
-		// Write updates to file
-		projectsList.updatePartiesFile();
+		// Write updates to database
+		db.updateProject(project.getDBOutput());
 
 		System.out.println("All done :)\n");
 	}
@@ -337,10 +355,19 @@ public class PoisedProjects {
 			System.out.println(message);
 		}
 
-		// Add project to completed list and write completed project to file 
+		// Add project to completed list 
 		projectsList.addCompletedProject(project);
-		FileWriterr.writeCompleted(project.getTextOutput() + ", " + new Date());
 
+		// Add project to completed projects database
+		Map<String,String> projectDeets = project.getDBOutput();
+		projectDeets.put("compl_date", dbDateFormat.format(new Date()));
+		db.writeCompletedPrjoject(projectDeets);
+
+		// Remove the project from the Projects database 
+        String proj_num = projectDeets.get("proj_num");
+        String erf = projectDeets.get("erf");
+        db.removeProject(proj_num, erf);
+		
 		System.out.println("Nice! Another project in the bag.\n");
 	}
 
