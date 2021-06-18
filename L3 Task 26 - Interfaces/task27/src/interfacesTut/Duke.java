@@ -3,7 +3,7 @@ package interfacesTut;
 public class Duke implements Homie {
     public static void main(String[] args) throws Exception {
 
-        Homie bob = new Duke("Bob", true);
+        Homie bob = new Duke("Duke", true);
         System.out.println(Homie.encouragementPhrase);
         bob.giveHighFive(true);
     }
