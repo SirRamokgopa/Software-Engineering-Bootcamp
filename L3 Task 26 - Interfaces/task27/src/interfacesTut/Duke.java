@@ -3,9 +3,9 @@ package interfacesTut;
 public class Duke implements Homie {
     public static void main(String[] args) throws Exception {
 
-        Homie bob = new Duke("Duke", true);
+        Homie duke = new Duke("Duke", true);
         System.out.println(Homie.encouragementPhrase);
-        bob.giveHighFive(true);
+        duke.giveHighFive(true);
     }
 
     public String name;
